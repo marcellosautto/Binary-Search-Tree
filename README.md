@@ -1,2 +1,2 @@
 # Binary_Search_Tree
-**Place tree.txt directly into the C drive before running the program (C:\tree.txt). You can edit the values inside the text file as well.**
+**You can edit the values inside the text file to change the initial tree. The text file is located inside the Release and Debug folders.**
