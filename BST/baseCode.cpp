@@ -64,28 +64,48 @@ void baseCode::displayTree(Node* r, int x, int y, int width)
 	if (r->left != nullptr && r->right != nullptr)
 	{
 		cout << r->num;
-		gotoxy(x - 18, y + 1);
-		cout << "__________________||__________________";
-		gotoxy(x - 18, y + 2);
-		cout << "|                                     |";
+		gotoxy(x - width, y + 1);
+		for (int i = 1; i <= width; i++)
+			cout << "_";
+		//cout << "__________________||__________________";
+		cout << "||";
+		for (int j = 1; j <= width; j++)
+			cout << "_";
+		gotoxy(x - width, y + 2);
+		cout << "|";
+		for (int k = 1; k <= (width)*2; k++)
+			cout << " ";
+		cout << "|";
+		//cout << "|                                     |";
 	}
 	//if theres only a left child
 	else if (r->left != nullptr && r->right == nullptr)
 	{
 		cout << r->num;
-		gotoxy(x - 18, y + 1);
-		cout << "___________________|";
-		gotoxy(x - 18, y + 2);
-		cout << "|                   ";
+		gotoxy(x - width, y + 1);
+		for (int i = 1; i <= width; i++)
+			cout << "_";
+		//cout << "___________________|";
+		cout << "|";
+		gotoxy(x - width, y + 2);
+		//cout << "|                   ";
+		cout << "|";
+		for (int j = 1; j <= width; j++)
+			cout << " ";
 	}
 	//if there's only a right child
 	else if (r->left == nullptr && r->right != nullptr)
 	{
 		cout << r->num;
 		gotoxy(x, y + 1);
-		cout << "|__________________";
+		cout << "|";
+		for (int i = 1; i <= width; i++)
+			cout << "_";
+		//cout << "|__________________";
 		gotoxy(x, y + 2);
-		cout << "                   |";
+		for (int j = 1; j <= width; j++)
+			cout << " ";
+		cout << "|";
 	}
 	else {
 		cout << r->num;
@@ -119,13 +139,13 @@ void baseCode::displayTree(Node* r, int x, int y, int width)
 
 void baseCode::menu()
 {
-	//cout << "   #    #     # #          #######                      " << endl;
-	//cout << "  # #   #     # #             #    #####  ###### ###### " << endl;
-	//cout << " #   #  #     # #             #    #    # #      #      " << endl;
-	//cout << "#     # #     # #             #    #    # #####  #####  " << endl;
-	//cout << "#######  #   #  #             #    #####  #      #      " << endl;
-	//cout << "#     #   # #   #             #    #   #  #      #      " << endl;
-	//cout << "#     #    #    #######       #    #    # ###### ###### " << endl << endl;
+	cout << "   #    #     # #          #######                      " << endl;
+	cout << "  # #   #     # #             #    #####  ###### ###### " << endl;
+	cout << " #   #  #     # #             #    #    # #      #      " << endl;
+	cout << "#     # #     # #             #    #    # #####  #####  " << endl;
+	cout << "#######  #   #  #             #    #####  #      #      " << endl;
+	cout << "#     #   # #   #             #    #   #  #      #      " << endl;
+	cout << "#     #    #    #######       #    #    # ###### ###### " << endl << endl;
 
 
 
@@ -150,8 +170,6 @@ void baseCode::menuChoice()
 			cout << endl << "Enter the Number You Want to Insert: " << endl;
 			cin >> addNum;
 			buildTree(addNum, root);
-			//checkBalMain(root);
-			//balanceTree(root);
 			system("cls");
 			menu();
 			displayTree(root, 110, 20, 20);
@@ -215,24 +233,7 @@ struct baseCode::Node* baseCode::buildTree(int n, Node* r)
 	else
 		return r;
 
-	int balanceFactor = Difference(r);
-
-	if (balanceFactor > 1) // Left subtree is taller
-	{
-		if (Difference(r->left) > 0)
-			return rightRightRotate(r);
-		else
-			return leftRightRotate(r);
-	}
-	else if (balanceFactor < -1) // Right subtree is taller
-	{
-		if (Difference(r->right) < 0)
-			return leftLeftRotate(r);
-		else
-			return rightLeftRotate(r);
-	}
-	else
-		return r;
+	balanceTree(r);
 }
 
 struct baseCode::Node* baseCode::ADD(int number, Node * n)
@@ -403,7 +404,7 @@ int main()
 	cout << "MAKE SURE TO USE FULL SCREEN WHEN RUNNING THE PROGRAM" << endl;
 	Sleep(1000);
 	cout << endl << "LOADING...";
-	Sleep(1000);
+	Sleep(2000);
 	system("cls");
 	bc.menu();
 	bc.menuChoice();

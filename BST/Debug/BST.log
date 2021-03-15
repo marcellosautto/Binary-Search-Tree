@@ -1,2 +1,3 @@
 ﻿  baseCode.cpp
+D:\VS_Projects\BST\BST\baseCode.cpp(256): warning C4715: 'baseCode::buildTree': not all control paths return a value
   BST.vcxproj -> D:\VS_Projects\BST\Debug\BST.exe
