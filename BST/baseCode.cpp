@@ -90,49 +90,52 @@ void baseCode::displayTree(Node* r, int x, int y, int width)
 	else {
 		cout << r->num;
 	}
-	displayTree(r->right, x + width, y + 3, width);
-	displayTree(r->left, x - width, y + 3, width);
+	//Sleep(1500);
+	displayTree(r->right, x + width, y + 3, width/2);
+	displayTree(r->left, x - width, y + 3, width/2);
 }
 
-void baseCode::readFile() //reads in nodes
-{
-	Node* temp;
-	while (in >> fileNum && fileNum != -1)
-	{
-		temp = new Node();
-		if (count == 0)
-		{
-			temp->num = fileNum;
-			root = temp;
-		}
-		else
-		{
-			buildTree(fileNum, root);
-		}
-
-		count++;
-	}
-	in.close();
-
-}
+//void baseCode::readFile() //reads in nodes
+//{
+//	Node* temp;
+//	while (in >> fileNum && fileNum != -1)
+//	{
+//		temp = new Node();
+//		if (count == 0)
+//		{
+//			temp->num = fileNum;
+//			root = temp;
+//		}
+//		else
+//		{
+//			buildTree(fileNum, root);
+//		}
+//
+//		count++;
+//	}
+//	in.close();
+//
+//}
 
 void baseCode::menu()
 {
-	cout << "########  #### ##    ##    ###    ########  ##    ##    ######## ########  ######## ########    ##     ## ####  ######  ##     ##    ###    ##       #### ########    ###    ######## ####  #######  ##    ##" << endl;
-	cout << "##     ##  ##  ###   ##   ## ##   ##     ##  ##  ##        ##    ##     ## ##       ##          ##     ##  ##  ##    ## ##     ##   ## ##   ##        ##       ##    ## ##      ##     ##  ##     ## ###   ##" << endl;
-	cout << "##     ##  ##  ####  ##  ##   ##  ##     ##   ####         ##    ##     ## ##       ##          ##     ##  ##  ##       ##     ##  ##   ##  ##        ##      ##    ##   ##     ##     ##  ##     ## ####  ##" << endl;
-	cout << "########   ##  ## ## ## ##     ## ########     ##          ##    ########  ######   ######      ##     ##  ##   ######  ##     ## ##     ## ##        ##     ##    ##     ##    ##     ##  ##     ## ## ## ##" << endl;
-	cout << "##     ##  ##  ##  #### ######### ##   ##      ##          ##    ##   ##   ##       ##           ##   ##   ##        ## ##     ## ######### ##        ##    ##     #########    ##     ##  ##     ## ##  ####" << endl;
-	cout << "##     ##  ##  ##   ### ##     ## ##    ##     ##          ##    ##    ##  ##       ##            ## ##    ##  ##    ## ##     ## ##     ## ##        ##   ##      ##     ##    ##     ##  ##     ## ##   ###" << endl;
-	cout << "########  #### ##    ## ##     ## ##     ##    ##          ##    ##     ## ######## ########       ###    ####  ######   #######  ##     ## ######## #### ######## ##     ##    ##    ####  #######  ##    ##" << endl;
+	//cout << "   #    #     # #          #######                      " << endl;
+	//cout << "  # #   #     # #             #    #####  ###### ###### " << endl;
+	//cout << " #   #  #     # #             #    #    # #      #      " << endl;
+	//cout << "#     # #     # #             #    #    # #####  #####  " << endl;
+	//cout << "#######  #   #  #             #    #####  #      #      " << endl;
+	//cout << "#     #   # #   #             #    #   #  #      #      " << endl;
+	//cout << "#     #    #    #######       #    #    # ###### ###### " << endl << endl;
 
-	cout << endl;
-	cout << "Enter (1) to Display Tree (LNR)" << endl;
-	cout << "Enter (2) to Display Tree (NLR)" << endl;
-	cout << "Enter (3) to Display Tree (LRN)" << endl;
-	cout << "Enter (4) to ADD Number" << endl;
-	cout << "Enter (5) to DELETE Number" << endl;
-	cout << "Enter (6) to Exit" << endl;
+
+
+	cout << "--------------------------------------------------------------------------- \n" <<
+		"         AVL Tree Implemenation \n" <<
+		"A: Insert an integer to tree and show the balanced tree at each insertion. \n" <<
+		"B: Display the balanced tree and show preorder traversal. \n" <<
+		"C: Display the balanced tree and show inorder traversal \n" <<
+		"D: Display the balanced tree and show postorder traversal \n" <<
+		"E: Exit \n";
 }
 
 void baseCode::menuChoice()
@@ -141,9 +144,22 @@ void baseCode::menuChoice()
 	{
 		cout << endl << "Enter a Command: ";
 		cin >> choice;
-		if (choice == '1') //print Tree with LNR order output
+
+		if (choice == 'A' || choice == 'a') //Prompts user to insert node
 		{
-			readFile();
+			cout << endl << "Enter the Number You Want to Insert: " << endl;
+			cin >> addNum;
+			buildTree(addNum, root);
+			//checkBalMain(root);
+			//balanceTree(root);
+			system("cls");
+			menu();
+			displayTree(root, 110, 20, 20);
+			cout << endl << endl << endl << endl << endl;
+		}
+		else if (choice == 'B' || choice == 'b') //print Tree with LNR order output
+		{
+			//readFile();
 			system("cls");
 			menu();
 			displayTree(root, 110, 20, 20);
@@ -152,9 +168,9 @@ void baseCode::menuChoice()
 			cout << endl << endl << endl << endl << endl;
 		}
 
-		else if (choice == '2')//print Tree with NLR order output
+		else if (choice == 'C' || choice == 'c')//print Tree with NLR order output
 		{
-			readFile();
+			//readFile();
 			system("cls");
 			menu();
 			displayTree(root, 110, 20, 20);
@@ -163,9 +179,9 @@ void baseCode::menuChoice()
 			cout << endl << endl << endl << endl << endl;
 		}
 
-		else if (choice == '3')//print Tree with LRN order output
+		else if (choice == 'D' || choice == 'd')//print Tree with LRN order output
 		{
-			readFile();
+			//readFile();
 			system("cls");
 			menu();
 			displayTree(root, 110, 20, 20);
@@ -174,30 +190,7 @@ void baseCode::menuChoice()
 			cout << endl << endl << endl << endl << endl;
 		}
 
-		else if (choice == '4') //Prompts user to insert node
-		{
-			cout << endl << "Enter the Number You Want to Insert: " << endl;
-			cin >> addNum;
-			ADD(addNum, root);
-			system("cls");
-			menu();
-			displayTree(root, 110, 20, 20);
-			cout << endl << endl << endl << endl << endl;
-		}
-
-
-		else if (choice == '5') //Prompts user to delete 
-		{
-			cout << endl << "Enter the Number You Want to Delete: " << endl;
-			cin >> removeNum;
-			DEL(removeNum, root);
-			system("cls");
-			menu();
-			displayTree(root, 110, 20, 20);
-			cout << endl << endl << endl << endl << endl;
-		}
-
-		else if (choice == '6')
+		else if (choice == 'E' || choice == 'e')
 			exit(0);
 	}
 }
@@ -208,25 +201,41 @@ struct baseCode::Node* baseCode::buildTree(int n, Node* r)
 	if (r == nullptr)
 	{
 		Node* temp = new Node(n);
+		if (root == nullptr)
+			root = temp;
+		//else if (temp->left == root || temp->right == root)
+			//root = temp;
 		return temp;
 	}
-	else //build the rest of the tree based on whether the nodes are greater or less than their parents
-	{
-		if (n <= r->num) //if the value is less than the current value, go to the left
-		{
-			r->left = buildTree(n, r->left);
-		}
-		else if (n >= r->num) //if the value is greater than the current value, go to the right
-		{
-			r->right = buildTree(n, r->right);
-		}
+	//build the rest of the tree based on whether the nodes are greater or less than their parents
+	if (n < r->num) //if the value is less than the current value, go to the left
+		r->left = buildTree(n, r->left);
+	else if (n > r->num) //if the value is greater than the current value, go to the right
+		r->right = buildTree(n, r->right);
+	else
 		return r;
-	}
 
-	return nullptr;
+	int balanceFactor = Difference(r);
+
+	if (balanceFactor > 1) // Left subtree is taller
+	{
+		if (Difference(r->left) > 0)
+			return rightRightRotate(r);
+		else
+			return leftRightRotate(r);
+	}
+	else if (balanceFactor < -1) // Right subtree is taller
+	{
+		if (Difference(r->right) < 0)
+			return leftLeftRotate(r);
+		else
+			return rightLeftRotate(r);
+	}
+	else
+		return r;
 }
 
-struct baseCode::Node* baseCode::ADD(int number, Node* n)
+struct baseCode::Node* baseCode::ADD(int number, Node * n)
 {
 	//if reached a node that is null, create a leaf with the value you want to add
 	if (n == nullptr)
@@ -246,42 +255,146 @@ struct baseCode::Node* baseCode::ADD(int number, Node* n)
 	return nullptr;
 }
 
-//Deletes the node input by the user//
-struct baseCode::Node* baseCode::DEL(int removeNumber, Node* r)
+struct baseCode::Node* baseCode::leftLeftRotate(Node * r)
 {
-	//base case
-	if (r == nullptr)
+	//Returns the tree node resulting from
+	// a left rotation.
+	Node* S = r->right;
+	Node* B = S->left;
+	S->left = r;
+	r->right = B;
+	return S;
+}
+
+struct baseCode::Node* baseCode::rightRightRotate(Node * r)
+{
+	// Returns the tree node resulting from
+	// a right rotation.
+	Node* S = r->left;
+	Node* B = S->right;
+	S->right = r;
+	r->left = B;
+	return S;
+}
+
+struct baseCode::Node* baseCode::leftRightRotate(Node * r)
+{
+	// Returns the tree node resulting from a
+	// right-left rotation.
+	Node* S = r->left;
+	r->left = leftLeftRotate(S);
+	return rightRightRotate(r);
+}
+
+struct baseCode::Node* baseCode::rightLeftRotate(Node * r)
+{
+	// Returns the tree node resulting from a
+	// right-left rotation.
+	Node* S = r->right;
+	r->right = rightRightRotate(S);
+	return leftLeftRotate(r);
+}
+
+struct baseCode::Node* baseCode::balanceTree(Node * r)
+{
+	int balanceFactor = Difference(r);
+
+	if (balanceFactor > 1) // Left subtree is taller
+	{
+		if (Difference(r->left) > 0)
+			return rightRightRotate(r);
+		else
+			return leftRightRotate(r);
+	}
+	else if (balanceFactor < -1) // Right subtree is taller
+	{
+		if (Difference(r->right) < 0)
+			return leftLeftRotate(r);
+		else
+			return rightLeftRotate(r);
+	}
+	else
 		return r;
+}
 
-	//if the number we're trying to remove is smaller than the current number we're looking at, it is in the left subtree
-	if (removeNumber < r->num)
-		r->left = DEL(removeNumber, r->left);
+int baseCode::Difference(Node * r)
+{
+	return (height(r->left) - height(r->right));
+}
 
-	//if the number we're trying to remove is larger than the current number we're looking at, it is in the right subtree
-	else if (removeNumber > r->num)
-		r->right = DEL(removeNumber, r->right);
-
-	//Once we've found the node containing the value we're trying to delete, check if the node has 2, 1 or 0 children
+int baseCode::height(Node * r) const
+{
+	if (r == nullptr)
+		return 0;
 	else
 	{
-		// if the right or left node does not contain a child
-		if (r->left == nullptr)
-			return r->right;
-		else if (r->right == nullptr)
-			return r->left;
-
-		// if there is a parent with two children, replace it with the node that is one left, and all the way to the right
-		Node* temp = r->left;
-
-		//loop down to find the rightmost leaf
-		while (temp->right != nullptr)
-			temp = temp->right;
-
-		// take that node and replace its value with the one that is being deleted, then delete the leaf that was used to replace the "delete" node
-		r->num = temp->num;
-		r->left = DEL(temp->num, r->left);
+		int heightLeft = height(r->left);
+		int heightRight = height(r->right);
+		if (heightLeft > heightRight)
+			return heightLeft + 1;
+		else
+			return heightRight + 1;
 	}
-	return r;
+}
+
+//Deletes the node input by the user//
+//struct baseCode::Node* baseCode::DEL(int removeNumber, Node* r)
+//{
+//	//base case
+//	if (r == nullptr)
+//		return r;
+//
+//	//if the number we're trying to remove is smaller than the current number we're looking at, it is in the left subtree
+//	if (removeNumber < r->num)
+//		r->left = DEL(removeNumber, r->left);
+//
+//	//if the number we're trying to remove is larger than the current number we're looking at, it is in the right subtree
+//	else if (removeNumber > r->num)
+//		r->right = DEL(removeNumber, r->right);
+//
+//	//Once we've found the node containing the value we're trying to delete, check if the node has 2, 1 or 0 children
+//	else
+//	{
+//		// if the right or left node does not contain a child
+//		if (r->left == nullptr)
+//			return r->right;
+//		else if (r->right == nullptr)
+//			return r->left;
+//
+//		// if there is a parent with two children, replace it with the node that is one left, and all the way to the right
+//		Node* temp = r->left;
+//
+//		//loop down to find the rightmost leaf
+//		while (temp->right != nullptr)
+//			temp = temp->right;
+//
+//		// take that node and replace its value with the one that is being deleted, then delete the leaf that was used to replace the "delete" node
+//		r->num = temp->num;
+//		r->left = DEL(temp->num, r->left);
+//	}
+//	return r;
+//}
+
+void baseCode::checkBalMain(Node * temp)
+{
+	int h = height(temp);
+	int i;
+	for (i = 1; i <= h; i++)
+		checkBal(temp, i);
+}
+
+/* Print nodes at a given level */
+void baseCode::checkBal(Node * temp, int level)
+{
+	if (temp == NULL)
+		return;
+
+	//BALANCE FUNCTION
+	if (level > 2)
+	{
+		checkBal(temp->left, level - 1);
+		checkBal(temp->right, level - 1);
+	}
 }
 
 int main()
@@ -290,7 +403,7 @@ int main()
 	cout << "MAKE SURE TO USE FULL SCREEN WHEN RUNNING THE PROGRAM" << endl;
 	Sleep(1000);
 	cout << endl << "LOADING...";
-	Sleep(2000);
+	Sleep(1000);
 	system("cls");
 	bc.menu();
 	bc.menuChoice();
